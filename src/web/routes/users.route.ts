@@ -1,17 +1,14 @@
-import { Router, Request, Response } from 'express'
-import UsersRepository from '../../infra/repositories/users.repository'
+import { Router, Request, Response } from "express";
+import UsersRepository from "../../infra/repositories/users.repository";
 
-export const userRouter = Router()
+export const userRouter = Router();
 
-userRouter.get('/user/:id', async (request: Request, response: Response) => {
-  const userRepo = new UsersRepository()
+userRouter.get("/user/:id", async (request: Request, response: Response) => {
+	const userRepo = new UsersRepository();
 
-  const { id } = request.params
+	const { id } = request.params;
 
-  const user = await userRepo.findByIdAsync(id)
+	const user = await userRepo.findByIdAsync(id);
 
-  return response.json(user)
-})
-
-
-
+	return response.json(user);
+});
