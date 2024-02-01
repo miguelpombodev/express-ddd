@@ -8,7 +8,7 @@ userRouter.get('/user/:id', async (request: Request, response: Response) => {
 
   const { id } = request.params
 
-  const user = await userRepo.findById(id)
+  const user = await userRepo.findByIdAsync(id)
 
   return response.json(user)
 })
