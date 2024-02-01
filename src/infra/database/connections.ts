@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm"
 import { Users } from "../../domain/entities/Users"
 
-export class DatabasesConnectionsInitiator {
+class DatabasesConnectionsInitiator {
   constructor() {
     this.relationalDatabaseConnectionORMOptions = new DataSource({
       type: process.env.DATABASE_TYPE,
@@ -28,3 +28,5 @@ export class DatabasesConnectionsInitiator {
     })
   }
 }
+
+export const dbConnectInitiator = new DatabasesConnectionsInitiator()
