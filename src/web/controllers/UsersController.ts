@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import GetUserFactory from "../../domain/factories/GetUser.factory";
+import GetUserFactory from "../../domain/factories/users/GetUser.factory";
 import { container } from "tsyringe";
 import GetUserService from "../../services/implementations/users/GetUserService";
 

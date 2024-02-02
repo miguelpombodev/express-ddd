@@ -1,4 +1,4 @@
-import GetUserFactory from "../../../domain/factories/GetUser.factory";
+import GetUserFactory from "../../../domain/factories/users/GetUser.factory";
 import { IUsersRepository } from "../../../domain/interfaces/repositories/UsersRepository.interface";
 import IGetUserService from "../../../domain/interfaces/services/IGetUser.interface";
 import { inject, injectable } from "tsyringe";
