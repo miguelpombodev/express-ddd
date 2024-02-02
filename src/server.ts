@@ -22,5 +22,16 @@ app.use(router);
 app.use(userRouter);
 
 app.listen(3333, () => {
-	console.log(`Server is running in port ${env.APP_PORT}`);
+	console.log(`
+[EXPRESS-DDD PROJECT]
+Server is running! 🚀
+[INFOS] : {
+		NODE_ENV: ${env.NODE_ENV},
+		PORT: ${env.APP_PORT},
+	  }
+
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+`);
 });

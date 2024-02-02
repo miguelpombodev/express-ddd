@@ -24,7 +24,7 @@ class DatabasesConnectionsInitiator {
 		this.relationalDatabaseConnectionORMOptions
 			.initialize()
 			.then(() => {
-				console.log("Database connected successfully");
+				console.log("\nDATABASE CONNECTED SUCCESSFULLY \n");
 			})
 			.catch((error) => {
 				console.log("Error Connecting to Database", error);
