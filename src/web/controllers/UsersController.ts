@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import GetUserFactory from "../../domain/factories/users/GetUser.factory";
 import { container } from "tsyringe";
 import GetUserService from "../../services/implementations/users/GetUserService";
+import winstonLogger from "../../infra/logger";
 
 export default class UsersControllers {
 	async getUser(
@@ -10,6 +11,9 @@ export default class UsersControllers {
 	): Promise<Response<GetUserFactory>> {
 		try {
 			const { id } = request.params;
+			winstonLogger.info(
+				`HTTP Request: [${request.method}] ${request.path}, params: ${id}`,
+			);
 			const _getUserServiceImplementation = container.resolve(GetUserService);
 			const user = await _getUserServiceImplementation.execute(id);
 

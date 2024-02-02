@@ -12,6 +12,7 @@ class DatabasesConnectionsInitiator {
 			password: env.DATABASE_PASSWORD,
 			database: env.DATABASE_NAME,
 			entities: [Users],
+			logging: ["query", "error", "info"],
 		});
 
 		this.initializeConnections();
