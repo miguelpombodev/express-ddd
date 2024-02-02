@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { Users } from "../../domain/entities/Users";
 import { dbConnectInitiator } from "../database/connections";
-import { IUsersRepository } from "../../domain/interfaces/repositories/usersRepository.interface";
+import { IUsersRepository } from "../../domain/interfaces/repositories/UsersRepository.interface";
 
 export default class UsersRepository implements IUsersRepository {
 	private repository: Repository<Users>;

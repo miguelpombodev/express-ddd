@@ -1,7 +1,9 @@
 import "reflect-metadata";
 import "dotenv/config";
 import express, { Router, Request, Response } from "express";
-import { userRouter } from "./web/routes/users.route";
+import { userRouter } from "./web/routes/Users.route";
+
+import "./services/injections";
 
 const app = express();
 const router = Router();
