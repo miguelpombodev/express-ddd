@@ -1,8 +1,6 @@
 import "reflect-metadata";
 import "dotenv/config";
 import express, { Router, Request, Response } from "express";
-import expressWinston from "express-winston";
-import { format, transports } from "winston";
 import { userRouter } from "./web/routes/Users.route";
 
 import { env } from "./domain/schemas/env.schema";
