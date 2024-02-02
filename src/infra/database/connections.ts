@@ -1,15 +1,16 @@
 import { DataSource } from "typeorm";
 import { Users } from "../../domain/entities/Users";
+import { env } from "../../domain/schemas/env.schema";
 
 class DatabasesConnectionsInitiator {
 	constructor() {
 		this.relationalDatabaseConnectionORMOptions = new DataSource({
-			type: process.env.DATABASE_TYPE,
-			host: process.env.DATABASE_HOST,
-			port: process.env.DATABASE_PORT,
-			username: process.env.DATABASE_USERNAME,
-			password: process.env.DATABASE_PASSWORD,
-			database: process.env.DATABASE_NAME,
+			type: env.DATABASE_TYPE,
+			host: env.DATABASE_HOST,
+			port: env.DATABASE_PORT,
+			username: env.DATABASE_USERNAME,
+			password: env.DATABASE_PASSWORD,
+			database: env.DATABASE_NAME,
 			entities: [Users],
 		});
 
