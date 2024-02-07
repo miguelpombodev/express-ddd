@@ -13,6 +13,7 @@ export class Users {
 		name: string,
 		phone: string,
 		email: string,
+		password: string,
 		cpf: string,
 		created_at: Date,
 		updated_at: Date,
@@ -21,6 +22,7 @@ export class Users {
 		this.Name = name;
 		this.Phone = phone;
 		this.Email = email;
+		this.Password = password;
 		this.CPF = cpf;
 		this.Created_At = created_at;
 		this.Updated_At = updated_at;
@@ -37,6 +39,9 @@ export class Users {
 
 	@Column("varchar", { length: 100, name: "email" })
 	Email: string;
+
+	@Column("text", { name: "password" })
+	Password: string;
 
 	@Column("varchar", { length: 11, name: "cpf" })
 	CPF: string;
