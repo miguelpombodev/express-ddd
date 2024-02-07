@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm";
 import { Users } from "@domain/entities/Users";
 import { env } from "@domain/schemas/env.schema";
-import winstonLogger from "@logger/index";
+import winstonLogger from "../../services/logger/index";
 
 class DatabasesConnectionsInitiator {
 	constructor() {

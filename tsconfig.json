@@ -36,7 +36,7 @@
 			"@implementations/*": ["./src/services/implementations/*"],
 			"@injections/*": ["./src/services/injections/*"],
 			"@repositories": ["./src/infra/repositories/*"],
-			"@logger/*": ["./src/infra/logger/*"],
+			"@logger/*": ["./src/services/logger/*"],
 			"@infra/*": ["./src/infra/*"],
 		} /* Specify a set of entries that re-map imports to additional lookup locations. */,
 		// "rootDirs": [],                                   /* Allow multiple folders to be treated as one when resolving modules. */

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import GetUserFactory from "@domain/factories/users/GetUser.factory";
 import { container } from "tsyringe";
 import GetUserService from "@implementations/users/GetUserService";
-import winstonLogger from "@logger/index";
+import winstonLogger from "../../services/logger/index";
 import CreateUserService from "@implementations/users/CreateUserService";
 
 export default class UsersControllers {
