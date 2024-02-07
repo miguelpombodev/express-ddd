@@ -1,9 +1,15 @@
 import { DataSource } from "typeorm";
 import { Users } from "@domain/entities/Users";
 import { env } from "@domain/schemas/env.schema";
+import winstonLogger from "@logger/index";
 
 class DatabasesConnectionsInitiator {
 	constructor() {
+		this.ORM_LOG_OPTIONS =
+			env.NODE_ENV !== "production"
+				? this.ORM_LOG_OPTIONS
+				: [...this.ORM_LOG_OPTIONS, "log"];
+
 		this.relationalDatabaseConnectionORMOptions = new DataSource({
 			type: env.DATABASE_TYPE,
 			host: env.DATABASE_HOST,
@@ -19,15 +25,16 @@ class DatabasesConnectionsInitiator {
 	}
 
 	relationalDatabaseConnectionORMOptions: DataSource;
+	ORM_LOG_OPTIONS = ["query", "error", "info"];
 
 	initializeConnections() {
 		this.relationalDatabaseConnectionORMOptions
 			.initialize()
 			.then(() => {
-				console.log("\nDATABASE CONNECTED SUCCESSFULLY \n");
+				winstonLogger.info("DATABASE CONNECTED SUCCESSFULLY");
 			})
 			.catch((error) => {
-				console.log("Error Connecting to Database", error);
+				winstonLogger.error(`Error Connecting to Database - ${error}`);
 			});
 	}
 }
