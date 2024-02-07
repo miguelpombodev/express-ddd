@@ -1,20 +1,14 @@
 import "reflect-metadata";
 import "dotenv/config";
-import express, { Router, Request, Response } from "express";
-import { userRouter } from "./web/routes/Users.route";
+import express from "express";
+import routes from "./web/routes";
 
 import "./services/injections";
 
 export const app = express();
-const router = Router();
 
 app.use(express.json());
 
-router.get("/", (req: Request, res: Response) => {
-	return res.json({
-		message: "It's working!",
-	});
+routes.forEach((route) => {
+	app.use(route.prefixName, route.route);
 });
-
-app.use(router);
-app.use(userRouter);
