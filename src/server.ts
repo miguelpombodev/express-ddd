@@ -1,5 +1,5 @@
 import { app } from "./app";
-import { env } from "./domain/schemas/env.schema";
+import { env } from "@domain/schemas/env.schema";
 
 app.listen(3333, () => {
 	console.log(`

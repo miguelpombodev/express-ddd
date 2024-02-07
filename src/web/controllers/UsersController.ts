@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import GetUserFactory from "../../domain/factories/users/GetUser.factory";
+import GetUserFactory from "@domain/factories/users/GetUser.factory";
 import { container } from "tsyringe";
-import GetUserService from "../../services/implementations/users/GetUserService";
-import winstonLogger from "../../infra/logger";
+import GetUserService from "@implementations/users/GetUserService";
+import winstonLogger from "@logger/index";
 
 export default class UsersControllers {
 	async getUser(

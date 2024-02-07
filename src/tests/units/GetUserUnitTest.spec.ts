@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import GetUserService from "../../services/implementations/users/GetUserService";
+import GetUserService from "@implementations/users/GetUserService";
 import UserRepositoryMock from "../mocks/user.mock";
 
 describe("Get user", () => {

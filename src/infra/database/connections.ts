@@ -1,6 +1,6 @@
 import { DataSource } from "typeorm";
-import { Users } from "../../domain/entities/Users";
-import { env } from "../../domain/schemas/env.schema";
+import { Users } from "@domain/entities/Users";
+import { env } from "@domain/schemas/env.schema";
 
 class DatabasesConnectionsInitiator {
 	constructor() {

@@ -1,5 +1,5 @@
-import { Users } from "../../domain/entities/Users";
-import { IUsersRepository } from "../../domain/interfaces/repositories/UsersRepository.interface";
+import { Users } from "@domain/entities/Users";
+import { IUsersRepository } from "@domain/interfaces/repositories/UsersRepository.interface";
 
 export default class UserRepositoryMock implements IUsersRepository {
 	users = [
