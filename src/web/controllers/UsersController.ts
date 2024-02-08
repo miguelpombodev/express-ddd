@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import GetUserFactory from "@domain/factories/users/GetUser.factory";
 import { container } from "tsyringe";
 import GetUserService from "@implementations/users/GetUserService";
-import winstonLogger from "../../services/logger/index";
 import CreateUserService from "@implementations/users/CreateUserService";
 
 export default class UsersControllers {
@@ -12,9 +11,6 @@ export default class UsersControllers {
 	): Promise<Response<GetUserFactory>> {
 		try {
 			const { id } = request.params;
-			winstonLogger.info(
-				`HTTP Request: [${request.method}] ${request.path}, params: ${id}`,
-			);
 			const _getUserServiceImplementation = container.resolve(GetUserService);
 			const user = await _getUserServiceImplementation.execute(id);
 
@@ -30,9 +26,6 @@ export default class UsersControllers {
 
 	async createUser(request: Request, response: Response) {
 		try {
-			winstonLogger.info(
-				`HTTP Request: [${request.method}] ${request.path}, params: ${request.body}`,
-			);
 			const { name, phone, email, password, cpf } = request.body;
 
 			const _createUserServiceImplementation =
