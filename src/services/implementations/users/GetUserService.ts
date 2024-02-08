@@ -11,11 +11,28 @@ export default class GetUserService implements IGetUserService {
 		@inject("UsersRepository")
 		private _repository: IUsersRepository,
 	) {}
-	async execute(id: string): Promise<GetUserFactory> {
+	async searchById(id: string): Promise<GetUserFactory | null> {
 		const result = await this._repository.findByIdAsync(id);
 
 		if (result === null) {
 			throw new APIError("User does not exists", 404);
+		}
+
+		const user = new GetUserFactory(
+			result?.Name,
+			result?.Phone,
+			result?.Email,
+			result?.CPF,
+		);
+
+		return user;
+	}
+
+	async searchByCPF(cpf: string): Promise<GetUserFactory | null> {
+		const result = await this._repository.findByCPFAsync(cpf);
+
+		if (result === null) {
+			return null;
 		}
 
 		const user = new GetUserFactory(

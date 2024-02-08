@@ -1,7 +1,9 @@
-import { Repository } from "typeorm";
+import { QueryFailedError, Repository } from "typeorm";
 import { Users } from "@domain/entities/Users";
 import { dbConnectInitiator } from "@database/connections";
 import { IUsersRepository } from "@domain/interfaces/repositories/UsersRepository.interface";
+import APIError from "@domain/errors/APIError";
+import DatabaseError from "@domain/errors/DatabaseError";
 
 export default class UsersRepository implements IUsersRepository {
 	private repository: Repository<Users>;
@@ -21,6 +23,14 @@ export default class UsersRepository implements IUsersRepository {
 		});
 	}
 
+	async findByCPFAsync(cpf: string): Promise<Users | null> {
+		return await this.repository.findOne({
+			where: {
+				CPF: cpf,
+			},
+		});
+	}
+
 	async createUserAsync(
 		id: string,
 		name: string,
@@ -29,16 +39,20 @@ export default class UsersRepository implements IUsersRepository {
 		password: string,
 		cpf: string,
 	): Promise<Users> {
-		const user = this.repository.create({
-			Id: id,
-			Name: name,
-			Email: email,
-			Password: password,
-			Phone: phone,
-			CPF: cpf,
-		});
+		try {
+			const user = this.repository.create({
+				Id: id,
+				Name: name,
+				Email: email,
+				Password: password,
+				Phone: phone,
+				CPF: cpf,
+			});
 
-		this.repository.save(user);
-		return user;
+			await this.repository.save(user);
+			return user;
+		} catch (error) {
+			throw new DatabaseError(error.message);
+		}
 	}
 }

@@ -3,6 +3,7 @@ import GetUserFactory from "@domain/factories/users/GetUser.factory";
 import { container } from "tsyringe";
 import GetUserService from "@implementations/users/GetUserService";
 import CreateUserService from "@implementations/users/CreateUserService";
+import APIError from "@domain/errors/APIError";
 
 export default class UsersControllers {
 	async getUser(
@@ -11,7 +12,11 @@ export default class UsersControllers {
 	): Promise<Response<GetUserFactory>> {
 		const { id } = request.params;
 		const _getUserServiceImplementation = container.resolve(GetUserService);
-		const user = await _getUserServiceImplementation.execute(id);
+		const user = await _getUserServiceImplementation.searchById(id);
+
+		if (user === null) {
+			throw new APIError("User already exists", 400);
+		}
 
 		return response.status(200).send(user);
 	}
@@ -21,6 +26,14 @@ export default class UsersControllers {
 
 		const _createUserServiceImplementation =
 			container.resolve(CreateUserService);
+		const _getUserServiceImplementation = container.resolve(GetUserService);
+
+		const checkUser = _getUserServiceImplementation.searchByCPF(cpf);
+
+		if (checkUser !== null) {
+			throw new APIError("User already exists", 400);
+		}
+
 		const userEmail = await _createUserServiceImplementation.execute(
 			name,
 			email,

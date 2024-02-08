@@ -2,6 +2,7 @@ import { Users } from "@domain/entities/Users";
 
 export interface IUsersRepository {
 	findByIdAsync(id: string): Promise<Users | null>;
+	findByCPFAsync(cpf: string): Promise<Users | null>;
 	createUserAsync(
 		id: string,
 		name: string,
