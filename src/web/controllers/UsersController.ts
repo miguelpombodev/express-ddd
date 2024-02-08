@@ -9,42 +9,26 @@ export default class UsersControllers {
 		request: Request,
 		response: Response,
 	): Promise<Response<GetUserFactory>> {
-		try {
-			const { id } = request.params;
-			const _getUserServiceImplementation = container.resolve(GetUserService);
-			const user = await _getUserServiceImplementation.execute(id);
+		const { id } = request.params;
+		const _getUserServiceImplementation = container.resolve(GetUserService);
+		const user = await _getUserServiceImplementation.execute(id);
 
-			response.statusCode = 200;
-			return response.send(user);
-		} catch (error: any) {
-			response.statusCode = 404;
-			return response.send({
-				message: error.message,
-			});
-		}
+		return response.status(200).send(user);
 	}
 
 	async createUser(request: Request, response: Response) {
-		try {
-			const { name, phone, email, password, cpf } = request.body;
+		const { name, phone, email, password, cpf } = request.body;
 
-			const _createUserServiceImplementation =
-				container.resolve(CreateUserService);
-			const userEmail = await _createUserServiceImplementation.execute(
-				name,
-				email,
-				password,
-				phone,
-				cpf,
-			);
+		const _createUserServiceImplementation =
+			container.resolve(CreateUserService);
+		const userEmail = await _createUserServiceImplementation.execute(
+			name,
+			email,
+			password,
+			phone,
+			cpf,
+		);
 
-			response.statusCode = 200;
-			return response.send({ message: userEmail });
-		} catch (error: any) {
-			response.statusCode = 404;
-			return response.send({
-				message: error.message,
-			});
-		}
+		return response.status(200).send({ message: userEmail });
 	}
 }
