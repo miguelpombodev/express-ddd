@@ -3,6 +3,7 @@ import ICreateUserService from "@domain/interfaces/services/ICreateUser.interfac
 import { randomUUID } from "crypto";
 import { inject, injectable } from "tsyringe";
 import PasswordEncryptionService from "../../PasswordHashingService";
+import ICreateUserDTO from "@domain/interfaces/dtos/CreateUserDTO";
 
 @injectable()
 export default class CreateUserService implements ICreateUserService {
@@ -10,13 +11,13 @@ export default class CreateUserService implements ICreateUserService {
 		@inject("UsersRepository")
 		private _repository: IUsersRepository,
 	) {}
-	public async execute(
-		name: string,
-		email: string,
-		phone: string,
-		password: string,
-		cpf: string,
-	): Promise<string> {
+	public async execute({
+		name,
+		email,
+		phone,
+		password,
+		cpf,
+	}: ICreateUserDTO): Promise<string> {
 		const id = randomUUID();
 		const hashedPassword =
 			await PasswordEncryptionService.hashPassword(password);

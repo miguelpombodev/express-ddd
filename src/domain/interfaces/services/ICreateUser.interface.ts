@@ -1,9 +1,11 @@
+import ICreateUserDTO from "../dtos/CreateUserDTO";
+
 export default interface ICreatetUserService {
-	execute(
-		name: string,
-		email: string,
-		phone: string,
-		password: string,
-		cpf: string,
-	): Promise<string>;
+	execute({
+		name,
+		email,
+		phone,
+		password,
+		cpf,
+	}: ICreateUserDTO): Promise<string>;
 }

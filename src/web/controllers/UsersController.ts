@@ -34,13 +34,13 @@ export default class UsersControllers {
 			throw new APIError("User already exists", 409);
 		}
 
-		const userEmail = await _createUserServiceImplementation.execute(
+		const userEmail = await _createUserServiceImplementation.execute({
 			name,
 			email,
 			password,
 			phone,
 			cpf,
-		);
+		});
 
 		return response.status(200).send({ message: userEmail });
 	}
