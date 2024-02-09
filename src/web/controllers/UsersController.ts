@@ -28,10 +28,10 @@ export default class UsersControllers {
 			container.resolve(CreateUserService);
 		const _getUserServiceImplementation = container.resolve(GetUserService);
 
-		const checkUser = _getUserServiceImplementation.searchByCPF(cpf);
+		const checkUser = await _getUserServiceImplementation.searchByCPF(cpf);
 
 		if (checkUser !== null) {
-			throw new APIError("User already exists", 400);
+			throw new APIError("User already exists", 409);
 		}
 
 		const userEmail = await _createUserServiceImplementation.execute(
