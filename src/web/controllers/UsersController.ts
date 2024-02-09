@@ -30,7 +30,7 @@ export default class UsersControllers {
 
 		const checkUser = await _getUserServiceImplementation.searchByCPF(cpf);
 
-		if (checkUser !== null) {
+		if (checkUser) {
 			throw new APIError("User already exists", 409);
 		}
 
