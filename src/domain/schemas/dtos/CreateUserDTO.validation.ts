@@ -1,13 +1,11 @@
-export default class CreateUserDTO {
-	constructor(name: string, phone: string, email: string, cpf: string) {
-		this.Name = name;
-		this.Phone = phone;
-		this.Email = email;
-		this.CPF = cpf;
-	}
+import { z } from "zod";
 
-	private Name: string;
-	private Phone: string;
-	private Email: string;
-	private CPF: string;
-}
+const createUserDTO = z.object({
+	name: z.string().trim(),
+	phone: z.string().startsWith("0").min(12).max(12),
+	email: z.string().email(),
+	password: z.string().min(8),
+	cpf: z.string().min(11).max(11),
+});
+
+export default createUserDTO;

@@ -1,7 +1,7 @@
 import { Router } from "express";
 import UsersControllers from "@controllers/UsersController";
 import { validateRequest } from "zod-express-middleware";
-import { z } from "zod";
+import createUserDTO from "@domain/schemas/dtos/CreateUserDTO.validation";
 
 export const userRouter = Router();
 const userControllers = new UsersControllers();
@@ -10,13 +10,7 @@ userRouter.get("/get/:id", userControllers.getUser);
 userRouter.post(
 	"/create",
 	validateRequest({
-		body: z.object({
-			name: z.string(),
-			phone: z.string(),
-			email: z.string(),
-			password: z.string(),
-			cpf: z.string(),
-		}),
+		body: createUserDTO,
 	}),
 	userControllers.createUser,
 );
