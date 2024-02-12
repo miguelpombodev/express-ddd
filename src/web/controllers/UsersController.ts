@@ -4,9 +4,11 @@ import { container } from "tsyringe";
 import GetUserService from "@implementations/users/GetUserService";
 import CreateUserService from "@implementations/users/CreateUserService";
 import APIError from "@domain/errors/APIError";
+import UpdateUserService from "@implementations/users/UpdateUserService";
+import UpdateUserDTO from "@domain/dtos/UpdateUser.dto";
 
 export default class UsersControllers {
-	async getUser(
+	public async getUser(
 		request: Request,
 		response: Response,
 	): Promise<Response<GetUserFactory>> {
@@ -15,13 +17,16 @@ export default class UsersControllers {
 		const user = await _getUserServiceImplementation.searchById(id);
 
 		if (user === null) {
-			throw new APIError("User already exists", 400);
+			throw new APIError("User does not exists", 409);
 		}
 
 		return response.status(200).send(user);
 	}
 
-	async createUser(request: Request, response: Response) {
+	public async createUser(
+		request: Request,
+		response: Response,
+	): Promise<Response<string>> {
 		const { name, phone, email, password, cpf } = request.body;
 
 		const _createUserServiceImplementation =
@@ -43,5 +48,29 @@ export default class UsersControllers {
 		});
 
 		return response.status(200).send({ message: userEmail });
+	}
+
+	public async updateUser(
+		request: Request,
+		response: Response,
+	): Promise<Response<boolean>> {
+		const userToBeUpdated = new UpdateUserDTO(request.body);
+
+		const _updateUserServiceImplementation =
+			container.resolve(UpdateUserService);
+		const _getUserServiceImplementation = container.resolve(GetUserService);
+
+		const getUser = await _getUserServiceImplementation.searchById(
+			userToBeUpdated.id,
+		);
+
+		if (getUser === null) {
+			throw new APIError("User does not exists", 409);
+		}
+
+		const updatedUser =
+			_updateUserServiceImplementation.updateOneUserAsync(userToBeUpdated);
+
+		return response.status(200).send(updatedUser);
 	}
 }

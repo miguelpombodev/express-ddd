@@ -1,4 +1,5 @@
 import { Users } from "@domain/entities/Users";
+import IUpdateUserDTO from "../dtos/UpdateUserDTO";
 
 export interface IUsersRepository {
 	findByIdAsync(id: string): Promise<Users | null>;
@@ -11,4 +12,7 @@ export interface IUsersRepository {
 		password: string,
 		cpf: string,
 	): Promise<Users>;
+	updateOneUserAsync(
+		userToBeUpdate: IUpdateUserDTO,
+	): Promise<number | undefined>;
 }

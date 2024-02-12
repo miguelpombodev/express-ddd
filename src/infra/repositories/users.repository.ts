@@ -1,9 +1,9 @@
-import { QueryFailedError, Repository } from "typeorm";
+import { Repository } from "typeorm";
 import { Users } from "@domain/entities/Users";
 import { dbConnectInitiator } from "@database/connections";
 import { IUsersRepository } from "@domain/interfaces/repositories/UsersRepository.interface";
-import APIError from "@domain/errors/APIError";
 import DatabaseError from "@domain/errors/DatabaseError";
+import IUpdateUserDTO from "@domain/interfaces/dtos/UpdateUserDTO";
 
 export default class UsersRepository implements IUsersRepository {
 	private repository: Repository<Users>;
@@ -15,7 +15,7 @@ export default class UsersRepository implements IUsersRepository {
 			);
 	}
 
-	async findByIdAsync(id: string): Promise<Users | null> {
+	public async findByIdAsync(id: string): Promise<Users | null> {
 		return await this.repository.findOne({
 			where: {
 				Id: id,
@@ -23,7 +23,7 @@ export default class UsersRepository implements IUsersRepository {
 		});
 	}
 
-	async findByCPFAsync(cpf: string): Promise<Users | null> {
+	public async findByCPFAsync(cpf: string): Promise<Users | null> {
 		return await this.repository.findOne({
 			where: {
 				CPF: cpf,
@@ -31,7 +31,7 @@ export default class UsersRepository implements IUsersRepository {
 		});
 	}
 
-	async createUserAsync(
+	public async createUserAsync(
 		id: string,
 		name: string,
 		email: string,
@@ -51,6 +51,25 @@ export default class UsersRepository implements IUsersRepository {
 
 			await this.repository.save(user);
 			return user;
+		} catch (error) {
+			throw new DatabaseError(error.message);
+		}
+	}
+
+	public async updateOneUserAsync(
+		usersInfos: IUpdateUserDTO,
+	): Promise<number | undefined> {
+		try {
+			const updatedUser = await this.repository.update(usersInfos.id, {
+				Id: usersInfos.id,
+				Name: usersInfos.name,
+				CPF: usersInfos.cpf,
+				Password: usersInfos.password,
+				Email: usersInfos.email,
+				Phone: usersInfos.phone,
+			});
+
+			return updatedUser.affected;
 		} catch (error) {
 			throw new DatabaseError(error.message);
 		}
