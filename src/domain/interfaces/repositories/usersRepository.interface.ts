@@ -1,5 +1,5 @@
 import { Users } from "@domain/entities/Users";
-import IUpdateUserDTO from "../dtos/UpdateUserDTO";
+import IUpdateUserDTO from "../dtos/IUpdateUserDTO";
 
 export interface IUsersRepository {
 	findByIdAsync(id: string): Promise<Users | null>;

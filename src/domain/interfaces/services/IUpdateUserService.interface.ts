@@ -1,4 +1,4 @@
-import IUpdateUserDTO from "../dtos/UpdateUserDTO";
+import IUpdateUserDTO from "../dtos/IUpdateUserDTO";
 
 export default interface IUpdateUserService {
 	updateOneUserAsync(

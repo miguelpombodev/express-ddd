@@ -1,4 +1,4 @@
-import ICreateUserDTO from "./CreateUserDTO";
+import ICreateUserDTO from "./ICreateUserDTO";
 
 export default interface IUpdateUserDTO extends ICreateUserDTO {
 	id: string;

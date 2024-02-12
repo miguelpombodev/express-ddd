@@ -1,4 +1,4 @@
-import IUpdateUserDTO from "@domain/interfaces/dtos/UpdateUserDTO";
+import IUpdateUserDTO from "@domain/interfaces/dtos/IUpdateUserDTO";
 import UsersRepository from "@infra/repositories/Users.repository";
 import { inject, injectable } from "tsyringe";
 

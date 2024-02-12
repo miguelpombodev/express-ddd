@@ -3,7 +3,7 @@ import { Users } from "@domain/entities/Users";
 import { dbConnectInitiator } from "@database/connections";
 import { IUsersRepository } from "@domain/interfaces/repositories/UsersRepository.interface";
 import DatabaseError from "@domain/errors/DatabaseError";
-import IUpdateUserDTO from "@domain/interfaces/dtos/UpdateUserDTO";
+import IUpdateUserDTO from "@domain/interfaces/dtos/IUpdateUserDTO";
 
 export default class UsersRepository implements IUsersRepository {
 	private repository: Repository<Users>;

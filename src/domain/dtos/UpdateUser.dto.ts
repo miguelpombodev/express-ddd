@@ -1,20 +1,20 @@
-import { Users } from "@domain/entities/Users";
-import IUpdateUserDTO from "@domain/interfaces/dtos/UpdateUserDTO";
+import IUpdateUserDTO from "@domain/interfaces/dtos/IUpdateUserDTO";
+import CreateUserDTO from "./CreateUser.dto";
 
-export default class UpdateUserDTO implements IUpdateUserDTO {
-	constructor(userToBeUpdated: Users) {
-		this.id = userToBeUpdated.Id;
-		this.name = userToBeUpdated.Name;
-		this.email = userToBeUpdated.Email;
-		this.phone = userToBeUpdated.Phone;
-		this.password = userToBeUpdated.Password;
-		this.cpf = userToBeUpdated.CPF;
+export default class UpdateUserDTO
+	extends CreateUserDTO
+	implements IUpdateUserDTO
+{
+	constructor(request_body: IUpdateUserDTO) {
+		super({
+			name: request_body.name,
+			email: request_body.email,
+			phone: request_body.phone,
+			password: request_body.password,
+			cpf: request_body.cpf,
+		});
+		this.id = request_body.id;
 	}
 
 	id: string;
-	name: string;
-	email: string;
-	phone: string;
-	password: string;
-	cpf: string;
 }

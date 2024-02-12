@@ -3,7 +3,7 @@ import ICreateUserService from "@domain/interfaces/services/ICreateUser.interfac
 import { randomUUID } from "crypto";
 import { inject, injectable } from "tsyringe";
 import PasswordEncryptionService from "../../PasswordHashingService";
-import ICreateUserDTO from "@domain/interfaces/dtos/CreateUserDTO";
+import ICreateUserDTO from "@domain/interfaces/dtos/ICreateUserDTO";
 
 @injectable()
 export default class CreateUserService implements ICreateUserService {

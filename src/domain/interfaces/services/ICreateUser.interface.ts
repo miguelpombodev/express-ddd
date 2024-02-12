@@ -1,4 +1,4 @@
-import ICreateUserDTO from "../dtos/CreateUserDTO";
+import ICreateUserDTO from "../dtos/ICreateUserDTO";
 
 export default interface ICreatetUserService {
 	execute({
