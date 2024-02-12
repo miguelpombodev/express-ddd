@@ -11,7 +11,7 @@ export default class GetUserService implements IGetUserService {
 		@inject("UsersRepository")
 		private _repository: IUsersRepository,
 	) {}
-	async searchById(id: string): Promise<GetUserFactory | null> {
+	public async searchById(id: string): Promise<GetUserFactory | null> {
 		const result = await this._repository.findByIdAsync(id);
 
 		if (result === null) {
@@ -28,7 +28,7 @@ export default class GetUserService implements IGetUserService {
 		return user;
 	}
 
-	async searchByCPF(cpf: string): Promise<GetUserFactory | null> {
+	public async searchByCPF(cpf: string): Promise<GetUserFactory | null> {
 		const result = await this._repository.findByCPFAsync(cpf);
 
 		if (result === null) {

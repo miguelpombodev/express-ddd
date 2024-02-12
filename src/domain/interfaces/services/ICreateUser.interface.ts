@@ -1,7 +1,7 @@
 import ICreateUserDTO from "../dtos/ICreateUserDTO";
 
 export default interface ICreatetUserService {
-	execute({
+	createOneUserAsync({
 		name,
 		email,
 		phone,

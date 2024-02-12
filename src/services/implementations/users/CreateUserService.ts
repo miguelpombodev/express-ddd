@@ -11,7 +11,7 @@ export default class CreateUserService implements ICreateUserService {
 		@inject("UsersRepository")
 		private _repository: IUsersRepository,
 	) {}
-	public async execute({
+	public async createOneUserAsync({
 		name,
 		email,
 		phone,

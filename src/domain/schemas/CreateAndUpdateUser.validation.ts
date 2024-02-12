@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-const createUserDTO = z.object({
+const createAndUpdateUserDTO = z.object({
 	name: z.string().trim(),
 	phone: z.string().startsWith("0").min(12).max(12),
 	email: z.string().email(),
@@ -8,4 +8,4 @@ const createUserDTO = z.object({
 	cpf: z.string().min(11).max(11),
 });
 
-export default createUserDTO;
+export default createAndUpdateUserDTO;

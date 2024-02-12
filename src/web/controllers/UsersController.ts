@@ -39,13 +39,15 @@ export default class UsersControllers {
 			throw new APIError("User already exists", 409);
 		}
 
-		const userEmail = await _createUserServiceImplementation.execute({
-			name,
-			email,
-			password,
-			phone,
-			cpf,
-		});
+		const userEmail = await _createUserServiceImplementation.createOneUserAsync(
+			{
+				name,
+				email,
+				password,
+				phone,
+				cpf,
+			},
+		);
 
 		return response.status(200).send({ message: userEmail });
 	}
@@ -54,7 +56,8 @@ export default class UsersControllers {
 		request: Request,
 		response: Response,
 	): Promise<Response<boolean>> {
-		const userToBeUpdated = new UpdateUserDTO(request.body);
+		const userId = request.params.id;
+		const userToBeUpdated = new UpdateUserDTO({ id: userId, ...request.body });
 
 		const _updateUserServiceImplementation =
 			container.resolve(UpdateUserService);
@@ -69,8 +72,10 @@ export default class UsersControllers {
 		}
 
 		const updatedUser =
-			_updateUserServiceImplementation.updateOneUserAsync(userToBeUpdated);
+			await _updateUserServiceImplementation.updateOneUserAsync(
+				userToBeUpdated,
+			);
 
-		return response.status(200).send(updatedUser);
+		return response.status(200).send({ message: updatedUser });
 	}
 }
