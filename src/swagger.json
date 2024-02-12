@@ -1,0 +1,51 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Express DDD - API",
+		"description": "This is a study project, please check the project's Github to more updates 😄",
+		"contact": {
+			"email": "lesomanolo2@gmail.com"
+		},
+		"version": "1.0"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:3333/v1/",
+			"description": "Default API"
+		}
+	],
+	"paths": {
+		"/healthcheck": {
+			"get": {
+				"summary": "Healthcheck route",
+				"description": "This is route is for any orchestrator as Kubernetes or other devs, to check if the API service is alive",
+				"tags": ["HEALTH"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"$ref": "#/components/schemas/HealthcheckResponse"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"HealthcheckResponse": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}

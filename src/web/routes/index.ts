@@ -3,11 +3,11 @@ import { userRouter } from "./Users.route";
 
 export default [
 	{
-		prefixName: "/users",
+		prefixName: "users",
 		route: userRouter,
 	},
 	{
-		prefixName: "/healthcheck",
+		prefixName: "healthcheck",
 		route: healthcheckRouter,
 	},
 ];
