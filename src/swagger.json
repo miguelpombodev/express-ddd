@@ -19,7 +19,7 @@
 			"get": {
 				"summary": "Healthcheck route",
 				"description": "This is route is for any orchestrator as Kubernetes or other devs, to check if the API service is alive",
-				"tags": ["HEALTH"],
+				"tags": ["Health"],
 				"responses": {
 					"200": {
 						"description": "OK",
@@ -34,6 +34,124 @@
 					}
 				}
 			}
+		},
+		"/users/get/{id}":{
+			"get": {
+				"summary": "Get One User Route",
+				"description": "Route to get one user basic informations",
+				"tags": ["User"],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "User unique indetifier (UUID)"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+									"schema": {
+										"type": "object",
+										"$ref": "#/components/schemas/UserBasicInfosResponse"
+									}
+								}
+						}
+					}
+				}
+			}
+		},
+		"/users/create":{
+			"post": {
+				"summary": "Create One User Route",
+				"description": "Route to create only one user",
+				"tags": ["User"],
+				"requestBody": {
+					"content":{
+						"application/json": {
+							"examples": {
+								"user": {
+									"value": {
+										"name": "User Test",
+										"email": "user@test.com",
+										"phone": "012345678901",
+										"password": "abcd123!@#",
+										"cpf": "00000000000"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+									"schema": {
+										"type": "object",
+										"properties": {
+											"email": {
+													"type":"string"
+											}
+										}
+									}
+								}
+						}
+					}
+				}
+			}
+		},
+		"/users/update/{id}":{
+			"put": {
+				"summary": "Update One User Route",
+				"description": "Route to update only one user",
+				"tags": ["User"],
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"required": true,
+						"description": "User unique indetifier (UUID)"
+					}
+				],
+				"requestBody": {
+					"content":{
+						"application/json": {
+							"examples": {
+								"user": {
+									"value": {
+										"name": "User Test",
+										"email": "user@test.com",
+										"phone": "012345678901",
+										"password": "abcd123!@#",
+										"cpf": "00000000000"
+									}
+								}
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "OK",
+						"content": {
+							"application/json": {
+									"schema": {
+										"type": "object",
+										"properties": {
+											"message": {
+													"type":"string"
+											}
+										}
+									}
+								}
+						}
+					}
+				}
+			}
 		}
 	},
 	"components": {
@@ -42,6 +160,23 @@
 				"type": "object",
 				"properties": {
 					"message": {
+						"type": "string"
+					}
+				}
+			},
+			"UserBasicInfosResponse": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"phone": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"cpf": {
 						"type": "string"
 					}
 				}
