@@ -6,8 +6,17 @@ export default function loggerMiddleware(
 	_: Response,
 	next: NextFunction,
 ): void {
+	const params = {
+		bodyParams: "",
+	};
+
+	if (Object.values(request.body).length !== 0) {
+		params.bodyParams = JSON.stringify(request.body);
+	}
+
 	winstonLogger.info(
-		`HTTP Request: [${request.method}] ${request.path}, params: ${request.params}`,
+		`HTTP Request: [${request.method}] ${request.path},
+		${params.bodyParams.length === 0 ? "" : "Body Params: " + params.bodyParams}`,
 	);
 
 	next();
