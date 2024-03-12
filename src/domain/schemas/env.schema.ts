@@ -9,6 +9,7 @@ const envSchema = z.object({
 	DATABASE_USERNAME: z.string(),
 	DATABASE_PASSWORD: z.string(),
 	DATABASE_NAME: z.string().default("Foodie_DB"),
+	API_SECRET: z.string(),
 });
 
 const _env = envSchema.safeParse(process.env);
