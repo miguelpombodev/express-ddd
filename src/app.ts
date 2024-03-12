@@ -9,6 +9,7 @@ import "./services/injections";
 import loggerMiddleware from "@middlewares/HttpRouteLogger.middleware";
 import APIErrorMiddleware from "@middlewares/APIError.middleware";
 import SwaggerJSON from "./swagger.json";
+import authJWTToken from "@middlewares/AuthJWTToken.middleware";
 
 export const app = express();
 
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(SwaggerJSON));
 
 app.use(loggerMiddleware);
+app.use(authJWTToken);
 
 routes.forEach((route) => {
 	app.use(`/v1/${route.prefixName}`, route.route);

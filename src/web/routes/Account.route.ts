@@ -9,8 +9,6 @@ export const accountRouter = Router();
 const userControllers = new UsersControllers();
 const accountController = new AccountControllers();
 
-accountRouter.get("/get/:id", userControllers.getUser);
-
 accountRouter.post(
 	"/login",
 	validateRequest({
@@ -27,6 +25,7 @@ accountRouter.post(
 	userControllers.createUser,
 );
 
+accountRouter.get("/get/:id", userControllers.getUser);
 accountRouter.put(
 	"/update/:id",
 	validateRequest({
