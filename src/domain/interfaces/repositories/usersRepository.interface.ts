@@ -4,6 +4,7 @@ import IUpdateUserDTO from "../dtos/IUpdateUserDTO";
 export interface IUsersRepository {
 	findByIdAsync(id: string): Promise<Users | null>;
 	findByCPFAsync(cpf: string): Promise<Users | null>;
+	findByEmailAsync(email: string): Promise<Users | null>;
 	createUserAsync(
 		id: string,
 		name: string,

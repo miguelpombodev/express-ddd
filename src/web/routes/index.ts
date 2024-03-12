@@ -1,10 +1,10 @@
 import { healthcheckRouter } from "./Healthcheck.route";
-import { userRouter } from "./Users.route";
+import { accountRouter } from "./Account.route";
 
 export default [
 	{
-		prefixName: "users",
-		route: userRouter,
+		prefixName: "account",
+		route: accountRouter,
 	},
 	{
 		prefixName: "healthcheck",

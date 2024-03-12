@@ -31,6 +31,14 @@ export default class UsersRepository implements IUsersRepository {
 		});
 	}
 
+	public async findByEmailAsync(email: string): Promise<Users | null> {
+		return await this.repository.findOne({
+			where: {
+				Email: email,
+			},
+		});
+	}
+
 	public async createUserAsync(
 		id: string,
 		name: string,

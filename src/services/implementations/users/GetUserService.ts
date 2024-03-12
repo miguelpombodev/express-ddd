@@ -44,4 +44,21 @@ export default class GetUserService implements IGetUserService {
 
 		return user;
 	}
+
+	public async searchByEmail(email: string): Promise<GetUserFactory | null> {
+		const result = await this._repository.findByEmailAsync(email);
+
+		if (result === null) {
+			return null;
+		}
+
+		const user = new GetUserFactory(
+			result?.Name,
+			result?.Phone,
+			result?.Email,
+			result?.CPF,
+		);
+
+		return user;
+	}
 }

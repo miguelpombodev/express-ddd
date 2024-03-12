@@ -10,4 +10,6 @@ export default class GetUserFactory {
 	private phone: string;
 	private email: string;
 	private cpf: string;
+
+	public getEmail = () => this.email;
 }
