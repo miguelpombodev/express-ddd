@@ -5,6 +5,7 @@ import { sign } from "jsonwebtoken";
 import APIError from "@domain/errors/APIError";
 import { IUsersRepository } from "@domain/interfaces/repositories/UsersRepository.interface";
 import LoginAccountDTO from "@domain/dtos/LoginAccount.dto";
+import JWTAuthFactory from "@domain/factories/auth/JWTAuth.factory";
 
 @injectable()
 export default class LoginAccountService implements ILoginAccountService {
@@ -16,7 +17,7 @@ export default class LoginAccountService implements ILoginAccountService {
 	public async loginAccountAsync({
 		email,
 		bodySentPassword,
-	}: LoginAccountDTO): Promise<string> {
+	}: LoginAccountDTO): Promise<JWTAuthFactory> {
 		const getRegisteredUser = await this._repository.findByEmailAsync(email);
 
 		if (getRegisteredUser === null) {
@@ -43,6 +44,6 @@ export default class LoginAccountService implements ILoginAccountService {
 			algorithm: "HS256",
 		});
 
-		return token;
+		return new JWTAuthFactory(token);
 	}
 }
