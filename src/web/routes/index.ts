@@ -1,7 +1,8 @@
 import { healthcheckRouter } from "./Healthcheck.route";
 import { accountRouter } from "./Account.route";
+import { loggedAccountRouter } from "./LoggedAccount.route";
 
-export default [
+export const generalRoutes = [
 	{
 		prefixName: "account",
 		route: accountRouter,
@@ -9,5 +10,12 @@ export default [
 	{
 		prefixName: "healthcheck",
 		route: healthcheckRouter,
+	},
+];
+
+export const loggedRoutes = [
+	{
+		prefixName: "account",
+		route: loggedAccountRouter,
 	},
 ];

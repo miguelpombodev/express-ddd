@@ -2,7 +2,7 @@ import "reflect-metadata";
 import "dotenv/config";
 import express from "express";
 import "express-async-errors";
-import routes from "./web/routes";
+import { generalRoutes, loggedRoutes } from "./web/routes";
 import swaggerUI from "swagger-ui-express";
 
 import "./services/injections";
@@ -18,9 +18,15 @@ app.use(express.json());
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(SwaggerJSON));
 
 app.use(loggerMiddleware);
-app.use(authJWTToken);
 
-routes.forEach((route) => {
+generalRoutes.forEach((route) => {
 	app.use(`/v1/${route.prefixName}`, route.route);
 });
+
+app.use(authJWTToken);
+
+loggedRoutes.forEach((route) => {
+	app.use(`/v1/${route.prefixName}`, route.route);
+});
+
 app.use(APIErrorMiddleware);

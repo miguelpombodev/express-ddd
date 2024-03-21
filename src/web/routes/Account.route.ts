@@ -24,12 +24,3 @@ accountRouter.post(
 	}),
 	userControllers.createUser,
 );
-
-accountRouter.get("/get/:id", userControllers.getUser);
-accountRouter.put(
-	"/update/:id",
-	validateRequest({
-		body: createAndUpdateUserDTO,
-	}),
-	userControllers.updateUser,
-);
