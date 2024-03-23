@@ -3,8 +3,13 @@ import { JwtPayload, verify } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import { env } from "@domain/schemas/env.schema";
 
-export interface RequestAuthenticated extends Request {
+export interface IRequestAuthenticated extends Request {
 	token: string | JwtPayload;
+	authenticatedUserEmail: string;
+}
+
+interface IDecodedJwtPayload extends JwtPayload {
+	email: string;
 }
 
 export default function authJWTToken(
@@ -21,9 +26,11 @@ export default function authJWTToken(
 
 		const [_, token] = getAuthorizationHeader.split(" ");
 
-		const decodedToken = verify(token, env.API_SECRET);
+		const decodedToken = verify(token, env.API_SECRET) as IDecodedJwtPayload;
 
-		(request as RequestAuthenticated).token = decodedToken;
+		(request as IRequestAuthenticated).token = decodedToken;
+		(request as IRequestAuthenticated).authenticatedUserEmail =
+			decodedToken.email;
 
 		next();
 	} catch (error) {

@@ -12,9 +12,10 @@ export default class UsersControllers {
 		request: Request,
 		response: Response,
 	): Promise<Response<GetUserFactory>> {
-		const { id } = request.params;
 		const _getUserServiceImplementation = container.resolve(GetUserService);
-		const user = await _getUserServiceImplementation.searchById(id);
+		const user = await _getUserServiceImplementation.searchByEmail(
+			request.authenticatedUserEmail,
+		);
 
 		if (user === null) {
 			throw new APIError("User does not exists", 409);

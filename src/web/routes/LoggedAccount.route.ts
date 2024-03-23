@@ -6,7 +6,7 @@ import createAndUpdateUserDTO from "@domain/schemas/CreateAndUpdateUser.validati
 export const loggedAccountRouter = Router();
 const userControllers = new UsersControllers();
 
-loggedAccountRouter.get("/get/:id", userControllers.getUser);
+loggedAccountRouter.get("/get", userControllers.getUser);
 loggedAccountRouter.put(
 	"/update/:id",
 	validateRequest({
